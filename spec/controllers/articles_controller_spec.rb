@@ -28,15 +28,10 @@ RSpec.describe ArticlesController, type: :controller do
     end
 
     describe '#update' do
-      describe 'update a record that already exists,'do
-        context 'when it finds Article' do
-          it 'redirect to article' do
-          end
-        end
-        context 'when not it find article' do
-          it 'redirect to new article page' do
-          end
-        end
+      it 'redirect to article' do
+      end
+
+      it 'redirect to new article page' do
       end
     end
 
