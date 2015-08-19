@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe CommentsController, type: :controller do
-  describe '#create'do
+  describe 'POST #create'do
      it 'redirect to lists of article' do
       end
     end
   end
 
-  describe '#destroy' do
+  describe 'DELETE #destroy' do
     context 'when find the comment' do
       it 'destroy the comment of databases' do
       end
