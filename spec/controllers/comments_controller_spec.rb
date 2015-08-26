@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe CommentsController, type: :controller do
   describe 'POST #create'do
      it 'redirect to lists of article' do
-      end
-    end
+       expect(subject).to redirect_to(:index)
+     end
   end
 
   describe 'DELETE #destroy' do
@@ -16,4 +16,6 @@ RSpec.describe CommentsController, type: :controller do
       it 'back show action for the article' do
       end
     end
+  end
 end
+

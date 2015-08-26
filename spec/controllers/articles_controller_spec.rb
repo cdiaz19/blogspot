@@ -2,40 +2,74 @@ require 'spec_helper'
 
 RSpec.describe ArticlesController, type: :controller do
   describe 'GET #index' do
-    it 'lists all the articles' do
+    it 'renders the index template' do
+      get :index
+      expect(response).to render_template(:index)
     end
   end
 
   describe 'GET #show' do
-    it 'show the article' do
+    let(:article) { FactoryGirl.create(:article) }
+
+    it 'assigns the article with a given id' do
+      get :show, id: article.id
+      expect(assigns(:article)).to eq(article)
+    end
+
+    it 'renders the article view' do
+      get :show, id: article.id
+      expect(response).to render_template(:show)
     end
   end
 
   describe 'GET #new'do
-    it 'shot the  new post' do
+    let(:article) { FactoryGirl.build(:article) }
+
+    it 'assigns an article' do
+      get :new
+      expect(assigns(:article)).to be_a_new(Article)
     end
   end
 
   describe 'POST #create' do
-    it 'article is valid' do
-      expect(subject).to redirect_to(@article)
+    let(:article) { FactoryGirl.create(:article)}
+
+    it 'renders the new artice' do
+      post :create, title: article.title
+                  , text: article.text
+      expect(render(:article)).to be_a_new(Article)
     end
-    it 'article is invalid' do
-      expect(subject).to render_template(:new)
+    it 'render the article view' do
+      get :new, id: article.id
+      expect(response).to render_template(:new)
     end
   end
 
   describe 'PUT #update' do
+    let(:article), { FactoryGirl.build(:article) }
+
+    it 'update the article with a given id' do
+      put :update, id: article.id
+      expect(response).to eq(article)
+    end
     it 'finds the requested article' do
-      expect(subject).to redirect_to(@article)
-      end
+      put :update, title: article.title
+                 , text: article.text
+      expect(update(:article).to to eq(Article)
+    end
     it 'dont finds the requested article' do
-      expect(subject).to render_template(:edit)
-      end
+      get :edit, title: article.title
+               , text: article.text
+      expect(response).to render temprate(:edit)
+    end
   end
 
   describe 'DELETE #destroy' do
-    it 'destroy the article' do
+    let(:article), { FactoryGirl.build(:article) }
+    
+    it 'delete the selected article with a given id' do
+      delete :article, id: article.id
+      expect(destroy(:article)).to eq(article)
     end
   end
 end
