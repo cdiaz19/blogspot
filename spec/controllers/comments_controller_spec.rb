@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe CommentsController, type: :controller do
   describe 'POST #create'do
      it 'redirect to lists of article' do
-       expect(subject).to redirect_to(:index)
+       expect(response).to redirect_to(:index)
      end
   end
 

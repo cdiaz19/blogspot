@@ -25,7 +25,7 @@ RSpec.describe ArticlesController, type: :controller do
   describe 'GET #new'do
     let(:article) { FactoryGirl.build(:article) }
 
-    it 'assigns an article' do
+    it 'assigns the new article' do
       get :new
       expect(assigns(:article)).to be_a_new(Article)
     end
@@ -34,12 +34,7 @@ RSpec.describe ArticlesController, type: :controller do
   describe 'POST #create' do
     let(:article) { FactoryGirl.create(:article)}
 
-    it 'renders the new artice' do
-      post :create, title: article.title
-                  , text: article.text
-      expect(render(:article)).to be_a_new(Article)
-    end
-    it 'render the article view' do
+    it 'show the article view' do
       get :new, id: article.id
       expect(response).to render_template(:new)
     end
@@ -52,20 +47,22 @@ RSpec.describe ArticlesController, type: :controller do
       put :update, id: article.id
       expect(response).to eq(article)
     end
+
     it 'finds the requested article' do
-      put :update, title: article.title
-                 , text: article.text
+      put :update, title: article.title,
+                   text: article.text
       expect(update(:article).to to eq(Article)
     end
+
     it 'dont finds the requested article' do
-      get :edit, title: article.title
-               , text: article.text
+      get :edit, title: article.title,
+                 text: article.text
       expect(response).to render temprate(:edit)
     end
   end
 
   describe 'DELETE #destroy' do
-    let(:article), { FactoryGirl.build(:article) }
+    let(:article), { FactoryGirl.create(:article) }
     
     it 'delete the selected article with a given id' do
       delete :article, id: article.id
