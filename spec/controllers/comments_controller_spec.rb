@@ -2,19 +2,27 @@ require 'rails_helper'
 
 RSpec.describe CommentsController, type: :controller do
   describe 'POST #create'do
-     it 'redirect to lists of article' do
-       expect(response).to redirect_to(:index)
+    let!(:article) { FactoryGirl.build(:article) }
+
+    it 'redirects the comment to article_path ' do
+       post :create, id: article.id, comment: { commenter: 'My new comment' }
+       expect(response).to redirect_to(article)
      end
   end
 
   describe 'DELETE #destroy' do
-    context 'when find the comment' do
-      it 'destroy the comment of databases' do
-      end
+    let!(:article) { FactoryGirl.create(:article) }
+
+    it 'delete the seleted comment with a given id' do
+      expect{
+        delete :destroy, id: article.id
+      }.to change(Comment, :count).by(-1)
     end
-    context 'when not find the comment' do
-      it 'back show action for the article' do
-      end
+
+    it 'redirect to articles_path' do
+      delete :destroy, if: article.id
+      expect(response).to redirect_to(article_path)
+
     end
   end
 end
