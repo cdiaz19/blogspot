@@ -34,9 +34,15 @@ RSpec.describe ArticlesController, type: :controller do
 
   describe 'POST #create' do
     let(:article_params) { FactoryGirl.attributes_for(:article) }
-    let!(:article) { FactoryGirl.build(:article) }
 
     context 'when the article params are valid' do
+
+      before { post :create, article: article_params }
+
+      it 'assigns @article as a new Article object' do
+        expect(assigns(:article)).to be_an_instance_of(Article)
+      end
+
       it 'persist the new article to database' do
         expect {
           post :create, article: article_params
@@ -44,14 +50,13 @@ RSpec.describe ArticlesController, type: :controller do
       end
 
       it 'redirects to the article :show view' do
-        post :create, article: article_params
-        expect(response).to redirect_to(article_path(@article))
+        expect(response).to redirect_to article_path(assigns(:article))
       end
     end
 
     context 'when the article params are not valid' do
       it 'renders the :new template' do
-        post :create, id: article.id,  article: { title: 'Try' }
+        post :create, article: { title: 'try', text: '' }
         expect(response).to render_template(:new)
       end
     end
