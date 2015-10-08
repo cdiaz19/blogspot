@@ -1,10 +1,10 @@
-Project: BlogPost || Version: 2.1
+Project: BlogPost || Version: 2.1<br>
 Based in GuideRuby: http://guides.rubyonrails.org/getting_started.html
 
-Information
+Information<br>
 
-Language Programming: Ruby on Rails
-Testing Framework: RSpec
-Ruby version 2.2.2
-Rails version 4.2.4
+Language Programming: Ruby on Rails<br>
+Testing Framework: RSpec<br>
+Ruby version 2.2.2<br>
+Rails version 4.2.4<br>
 Blog: http://apprenticecode.blogspot.com/
