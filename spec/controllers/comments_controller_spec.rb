@@ -2,11 +2,10 @@ require 'rails_helper'
 
 RSpec.describe CommentsController, type: :controller do
   describe 'POST #create'do
-    let!(:article) { FactoryGirl.build(:article) }
+    let!(:article) { FactoryGirl.create(:article) }
 
-    it 'redirects the comment to article_path ' do
-      post :create, id: article.id, comment: { commenter: 'My new comment' }
-      expect(response).to redirect_to(article)
+    it 'assigns @article as a new Article Object'do
+      expect(assigns(:article)). to be_an_instance_of(Article)
     end
   end
 
